@@ -1,0 +1,22 @@
+version: '3.5'
+
+services:
+  node:
+    image: node:10.15-alpine
+    container_name: fastify
+    env_file: .env
+    volumes:
+      - ./app:/usr/app
+      - ./app/src:/usr/app/src
+    working_dir: /usr/app
+    user: node
+    ports:
+      - "${PORT}:${PORT}"
+    command: ["npm", "run", "serve"]
+    networks:
+      fastify-starter:
+
+
+networks:
+  fastify-starter:
+    name: fastify-starter_network
